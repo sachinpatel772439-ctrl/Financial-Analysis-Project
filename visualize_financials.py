@@ -3,16 +3,13 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from pathlib import Path
 
-# Load data
 df = pd.read_csv("Dataset/Financials_Analysis_Ready.csv")
 
-# Create output folder
 output = Path("Screenshorts")
 output.mkdir(exist_ok=True)
 
 sns.set_theme(style="whitegrid")
 
-# Country performance
 country = df.groupby("Country")[["Sales", "Profit"]].sum().reset_index()
 
 fig, axes = plt.subplots(1, 2, figsize=(15, 6))
@@ -31,7 +28,6 @@ plt.tight_layout()
 plt.savefig(output / "Country_Performance.png", dpi=300)
 plt.close()
 
-# Product performance
 product = df.groupby("Product")[["Sales", "Profit"]].sum().reset_index()
 
 fig, axes = plt.subplots(1, 2, figsize=(15, 6))
