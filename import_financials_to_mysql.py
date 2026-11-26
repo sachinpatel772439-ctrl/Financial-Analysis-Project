@@ -1,12 +1,9 @@
-
 import pandas as pd
 import mysql.connector
 from getpass import getpass
 
-# Read cleaned dataset
 df = pd.read_csv("Dataset/Financials_Analysis_Ready.csv")
 
-# Match CSV column names with MySQL table columns
 df.rename(columns={
     "Discount Band": "Discount_Band",
     "Units Sold": "Units_Sold",
@@ -26,10 +23,8 @@ columns = [
 
 df = df[columns]
 
-# Convert dates
 df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
 
-# Convert missing values to SQL NULL
 def convert_value(value):
     if pd.isna(value):
         return None
